@@ -1,0 +1,8 @@
+name: Vex
+main: VectorNetworkProject\Vex\Main
+api: 3
+
+description: TheMix remix
+website: https://www.vector-network.tk
+version: 1.0.0
+author: VectorNetworkProject
