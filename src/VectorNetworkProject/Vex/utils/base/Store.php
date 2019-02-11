@@ -23,10 +23,19 @@
  * SOFTWARE.
  */
 
-namespace VectorNetworkProject\Vex\utils;
+namespace VectorNetworkProject\Vex\utils\base;
 
 
-class Contents
+abstract class Store
 {
+    /** @var array $store */
+    protected $store = [];
 
+    /**
+     * @return mixed
+     */
+    public function getStore()
+    {
+        return $this->store;
+    }
 }
