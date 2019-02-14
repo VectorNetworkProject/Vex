@@ -23,45 +23,15 @@
  * SOFTWARE.
  */
 
-namespace VectorNetworkProject\Vex;
+namespace VectorNetworkProject\Vex\language;
 
-use pocketmine\plugin\PluginBase;
-use VectorNetworkProject\Vex\language\i18n;
 
-class Main extends PluginBase
+use pocketmine\lang\BaseLang;
+
+class Language extends BaseLang
 {
-    /** @var Main $instance */
-    private static $instance = null;
-
-    public function onLoad()
+    public function __construct(string $lang)
     {
-        $this->saveDefaultConfig();
-        self::$instance = $this;
-        $this->getLogger()->notice('Loaded');
-    }
-
-    public function onEnable()
-    {
-        $this->init();
-        $this->getLogger()->notice('Enabled');
-    }
-
-    public function onDisable()
-    {
-        $this->getLogger()->notice('Disabled');
-    }
-
-    /**
-     * @return Main
-     */
-    public static function getInstance(): Main
-    {
-        return self::$instance;
-    }
-
-    private function init(): void
-    {
-        new i18n();
-        EventManager::init($this);
+        parent::__construct($lang, i18n::getPath(), i18n::FALLBACK_LANG);
     }
 }

@@ -29,6 +29,7 @@ namespace VectorNetworkProject\Vex\event;
 use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerPreLoginEvent;
 use pocketmine\Server;
+use VectorNetworkProject\Vex\language\i18n;
 
 class PlayerEventListener implements Listener
 {
@@ -36,7 +37,7 @@ class PlayerEventListener implements Listener
     {
         $player = $event->getPlayer();
         if (Server::getInstance()->hasWhitelist() && !Server::getInstance()->isWhitelisted(strtolower($player->getName()))) {
-            $player->close($player->getLeaveMessage(), 'おっと兄ちゃん、ホワイトリストが有効だぞ！');
+            $player->close($player->getLeaveMessage(), i18n::getLang($player->getLocale())->translateString('player.whitelist.message', [$player->getName()]));
         }
     }
 }
