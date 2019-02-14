@@ -29,9 +29,6 @@ use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase
 {
-    /** @var bool $beta */
-    private static $beta = true;
-
     /** @var Main $instance */
     private static $instance = null;
 
@@ -44,7 +41,6 @@ class Main extends PluginBase
 
     public function onEnable()
     {
-        if (self::$beta) $this->getLogger()->warning('masterブランチのものを実行しています！');
         $this->getLogger()->notice('Enabled');
     }
 
