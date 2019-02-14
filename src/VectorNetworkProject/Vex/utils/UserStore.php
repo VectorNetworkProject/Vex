@@ -23,43 +23,12 @@
  * SOFTWARE.
  */
 
-namespace VectorNetworkProject\Vex;
+namespace VectorNetworkProject\Vex\utils;
 
-use pocketmine\plugin\PluginBase;
 
-class Main extends PluginBase
+use VectorNetworkProject\Vex\utils\base\Store;
+
+class UserStore extends Store
 {
-    /** @var Main $instance */
-    private static $instance = null;
 
-    public function onLoad()
-    {
-        $this->saveDefaultConfig();
-        self::$instance = $this;
-        $this->getLogger()->notice('Loaded');
-    }
-
-    public function onEnable()
-    {
-        $this->init();
-        $this->getLogger()->notice('Enabled');
-    }
-
-    public function onDisable()
-    {
-        $this->getLogger()->notice('Disabled');
-    }
-
-    /**
-     * @return Main
-     */
-    public static function getInstance(): Main
-    {
-        return self::$instance;
-    }
-
-    private function init(): void
-    {
-        EventManager::init($this);
-    }
 }

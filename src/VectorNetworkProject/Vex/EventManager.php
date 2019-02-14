@@ -25,41 +25,20 @@
 
 namespace VectorNetworkProject\Vex;
 
-use pocketmine\plugin\PluginBase;
 
-class Main extends PluginBase
+use pocketmine\Server;
+use VectorNetworkProject\Vex\event\PlayerEventListener;
+
+class EventManager
 {
-    /** @var Main $instance */
-    private static $instance = null;
+    /** @var bool $register */
+    private static $register = false;
 
-    public function onLoad()
+    public static function init(Main $main): void
     {
-        $this->saveDefaultConfig();
-        self::$instance = $this;
-        $this->getLogger()->notice('Loaded');
-    }
-
-    public function onEnable()
-    {
-        $this->init();
-        $this->getLogger()->notice('Enabled');
-    }
-
-    public function onDisable()
-    {
-        $this->getLogger()->notice('Disabled');
-    }
-
-    /**
-     * @return Main
-     */
-    public static function getInstance(): Main
-    {
-        return self::$instance;
-    }
-
-    private function init(): void
-    {
-        EventManager::init($this);
+        if (!static::$register) {
+            Server::getInstance()->getPluginManager()->registerEvents(new PlayerEventListener(), $main);
+            static::$register = true;
+        }
     }
 }

@@ -23,43 +23,20 @@
  * SOFTWARE.
  */
 
-namespace VectorNetworkProject\Vex;
+namespace VectorNetworkProject\Vex\event;
 
-use pocketmine\plugin\PluginBase;
 
-class Main extends PluginBase
+use pocketmine\event\Listener;
+use pocketmine\event\player\PlayerPreLoginEvent;
+use pocketmine\Server;
+
+class PlayerEventListener implements Listener
 {
-    /** @var Main $instance */
-    private static $instance = null;
-
-    public function onLoad()
+    public function onPreLogin(PlayerPreLoginEvent $event)
     {
-        $this->saveDefaultConfig();
-        self::$instance = $this;
-        $this->getLogger()->notice('Loaded');
-    }
-
-    public function onEnable()
-    {
-        $this->init();
-        $this->getLogger()->notice('Enabled');
-    }
-
-    public function onDisable()
-    {
-        $this->getLogger()->notice('Disabled');
-    }
-
-    /**
-     * @return Main
-     */
-    public static function getInstance(): Main
-    {
-        return self::$instance;
-    }
-
-    private function init(): void
-    {
-        EventManager::init($this);
+        $player = $event->getPlayer();
+        if (Server::getInstance()->hasWhitelist() && !Server::getInstance()->isWhitelisted(strtolower($player->getName()))) {
+            $player->close($player->getLeaveMessage(), 'おっと兄ちゃん、ホワイトリストが有効だぞ！');
+        }
     }
 }
