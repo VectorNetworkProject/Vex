@@ -39,13 +39,19 @@ class i18n
     /** @var Language[] $language */
     private static $language;
 
+    private static $lang = [
+        'en_US',
+        'ja_JP'
+    ];
+
     public function __construct()
     {
         try {
+            @mkdir(static::getPath());
             $this->LangLoader();
         } catch (\ErrorException $e) {
             MainLogger::getLogger()->logException($e);
-            Server::getInstance()->forceShutdown();
+            Server::getInstance()->shutdown();
         }
     }
 
@@ -55,6 +61,9 @@ class i18n
     private function LangLoader(): void
     {
         $path = static::getPath();
+        foreach (static::$lang as $filename) {
+            Main::getInstance()->saveResource(static::getPath().$filename.'.ini', true);
+        }
         if (is_dir($path)) {
             $allFiles = scandir($path, SCANDIR_SORT_NONE);
             if ($allFiles !== false) {
