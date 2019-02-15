@@ -26,6 +26,7 @@
 namespace VectorNetworkProject\Vex;
 
 use pocketmine\plugin\PluginBase;
+use pocketmine\utils\Utils;
 use VectorNetworkProject\Vex\language\i18n;
 use VectorNetworkProject\Vex\language\Language;
 
@@ -49,6 +50,7 @@ class Main extends PluginBase
     public function onEnable()
     {
         $this->init();
+        $this->getLogger()->notice('IP: '.Utils::getIP(true));
         $this->getLogger()->notice('Enabled');
     }
 

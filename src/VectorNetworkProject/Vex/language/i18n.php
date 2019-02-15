@@ -26,6 +26,8 @@
 namespace VectorNetworkProject\Vex\language;
 
 
+use pocketmine\utils\MainLogger;
+
 class i18n
 {
     public const LANGUAGE_DIR = 'lang';
@@ -41,6 +43,7 @@ class i18n
     public static function register(Language $language): void
     {
         static::$language[$language->getLang()] = $language;
+        MainLogger::getLogger()->info(`Load {$language}.ini`);
     }
 
     /**
