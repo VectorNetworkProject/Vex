@@ -56,7 +56,7 @@
     "pocketmine/math": "^0.2.0",
     "pocketmine/snooze": "^0.1.0",
     "daverandom/callback-validator": "dev-master",
-    "adhocore/json-comment": "^0.0.7"
+    "adhocore/json-comment": "0.0.7"
   },
   "autoload": {
     "psr-4": {
