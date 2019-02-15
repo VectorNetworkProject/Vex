@@ -35,6 +35,11 @@ class Main extends PluginBase
 
     public function onLoad()
     {
+        \Phar::running() !== ''
+            ? define('vex\PATH', \Phar::running() . DIRECTORY_SEPARATOR)
+            : define('vex\PATH', dirname(__FILE__, 3) . DIRECTORY_SEPARATOR);
+        define('vex\RESOURCES_PATH', \vex\PATH . 'resources' . DIRECTORY_SEPARATOR);
+
         $this->saveDefaultConfig();
         self::$instance = $this;
         $this->getLogger()->notice('Loaded');

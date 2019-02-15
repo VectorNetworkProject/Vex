@@ -47,7 +47,6 @@ class i18n
     public function __construct()
     {
         try {
-            @mkdir(static::getPath());
             $this->LangLoader();
         } catch (\ErrorException $e) {
             MainLogger::getLogger()->logException($e);
@@ -61,9 +60,6 @@ class i18n
     private function LangLoader(): void
     {
         $path = static::getPath();
-        foreach (static::$lang as $filename) {
-            Main::getInstance()->saveResource(static::getPath().$filename.'.ini', true);
-        }
         if (is_dir($path)) {
             $allFiles = scandir($path, SCANDIR_SORT_NONE);
             if ($allFiles !== false) {
@@ -97,6 +93,6 @@ class i18n
      */
     public static function getPath(): string
     {
-        return Main::getInstance()->getDataFolder() . static::LANGUAGE_DIR . DIRECTORY_SEPARATOR;
+        return \vex\RESOURCES_PATH . static::LANGUAGE_DIR . DIRECTORY_SEPARATOR;
     }
 }
