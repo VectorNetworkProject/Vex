@@ -26,9 +26,6 @@
 namespace VectorNetworkProject\Vex\language;
 
 
-use pocketmine\Server;
-use pocketmine\utils\MainLogger;
-
 class i18n
 {
     public const LANGUAGE_DIR = 'lang';
@@ -38,37 +35,12 @@ class i18n
     /** @var Language[] $language */
     private static $language;
 
-    public function __construct()
-    {
-        try {
-            $this->LangLoader();
-        } catch (\ErrorException $e) {
-            MainLogger::getLogger()->logException($e);
-            Server::getInstance()->shutdown();
-        }
-    }
-
     /**
-     * @throws \ErrorException
+     * @param Language $language
      */
-    private function LangLoader(): void
+    public static function register(Language $language): void
     {
-        $path = static::getPath();
-        if (is_dir($path)) {
-            $allFiles = scandir($path, SCANDIR_SORT_NONE);
-            if ($allFiles !== false) {
-                $files = array_filter($allFiles, function ($filename) {
-                    return substr($filename, -4) === ".ini";
-                });
-                foreach ($files as $file) {
-                    $code = explode(".", $file)[0];
-                    $lang = new Language($code);
-                    static::$language[$lang->getLang()] = $lang;
-                }
-            }
-        }
-
-        throw new \ErrorException("Language directory $path does not exist or is not a directory");
+        static::$language[$language->getLang()] = $language;
     }
 
     /**

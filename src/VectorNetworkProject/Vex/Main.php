@@ -27,6 +27,7 @@ namespace VectorNetworkProject\Vex;
 
 use pocketmine\plugin\PluginBase;
 use VectorNetworkProject\Vex\language\i18n;
+use VectorNetworkProject\Vex\language\Language;
 
 class Main extends PluginBase
 {
@@ -66,7 +67,13 @@ class Main extends PluginBase
 
     private function init(): void
     {
-        new i18n();
+        $this->registerLanguage();
         EventManager::init($this);
+    }
+
+    private function registerLanguage(): void
+    {
+        i18n::register(new Language('ja_jp'));
+        i18n::register(new Language('en_us'));
     }
 }
