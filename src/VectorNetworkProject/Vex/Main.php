@@ -69,7 +69,7 @@ class Main extends PluginBase
 
     private function init(): void
     {
-        $this->registerLanguage();
+        // $this->registerLanguage();
         EventManager::init($this);
     }
 
