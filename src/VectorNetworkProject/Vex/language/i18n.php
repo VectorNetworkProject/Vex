@@ -28,7 +28,6 @@ namespace VectorNetworkProject\Vex\language;
 
 use pocketmine\Server;
 use pocketmine\utils\MainLogger;
-use VectorNetworkProject\Vex\Main;
 
 class i18n
 {
@@ -38,11 +37,6 @@ class i18n
 
     /** @var Language[] $language */
     private static $language;
-
-    private static $lang = [
-        'en_US',
-        'ja_JP'
-    ];
 
     public function __construct()
     {
